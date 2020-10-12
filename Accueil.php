@@ -16,8 +16,8 @@
              Twolf59" >
 
 
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+<body style="background-image: url('image/background.jpg'); background-size: cover; background-reapeat: no-repeat;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">Navbar w/ text</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -35,10 +35,16 @@
       </li>
     </ul>
     <form class="form-inline">
-    <button class="btn btn-sm btn-outline-secondary" type="button"><a class="nav-link" href="inscription.php">Inscription</a></button>
+    <button class="btn btn-sm btn-light" type="button"><a class="nav-link" href="inscription.php">Inscription</a></button>
     </form>
   </div>
 </nav>
-<h1>Yolo</h1>
+<div style ="height: 100%;">
+  <div style="margin: 20%;">
+    <div class="text-center">
+      <a href="connection.php" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Se Connecter</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>
