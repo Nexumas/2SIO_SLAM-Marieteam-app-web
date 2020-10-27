@@ -27,7 +27,11 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
+<<<<<<< HEAD
+        <a class="nav-link" href="Accueil.php">Accueil <span class="sr-only">(current)</span></a>
+=======
         <a class="nav-link" href="consultation_des_liaisons.php">Consulter les liaisons <span class="sr-only">(current)</span></a>
+>>>>>>> 33acc1fd9cbee007f5eb9bf9a009a72d4a70fdc4
       </li>
 	  <!--uniquement disponible pour les administrateurs DEBUT-->
       <li class="nav-item">
