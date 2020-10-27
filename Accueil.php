@@ -16,7 +16,7 @@
              Twolf59" >
 
 
-<body style="background-image: url('image/background.jpg'); background-size: cover; background-reapeat: no-repeat;">
+<body style="background-image: url('images/background.jpg'); background-size: cover; background-reapeat: no-repeat;">
 
 <!-- DEBUT NAVBAR - navbar créée avec bootstrap -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -27,14 +27,16 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="Accueil.php">Accueil <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="consultation_des_liaisons.php">Consulter les liaisons <span class="sr-only">(current)</span></a>
+      </li>
+	  <!--uniquement disponible pour les administrateurs DEBUT-->
+      <li class="nav-item">
+        <a class="nav-link" href="modification_des_liaisons.php">Modifier les liaisons</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">opt2</a>
+        <a class="nav-link" href="statistiques.php">Statistiques</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">opt3</a>
-      </li>
+	  <!--uniquement disponible pour les administrateurs FIN-->
     </ul>
 
     <!-- DEBUT BOUTON D'INSCRIPTION -->
