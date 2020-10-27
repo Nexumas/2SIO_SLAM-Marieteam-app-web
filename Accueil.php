@@ -27,7 +27,7 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">opt1 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="Accueil.php">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">opt2</a>
