@@ -55,6 +55,7 @@
 			<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Veuillez sélectionner un secteur
 			</button>
+		
 			<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 				<button class="dropdown-item" type="button">Secteur 1</button>
 				<button class="dropdown-item" type="button">Secteur 2</button>
@@ -64,6 +65,7 @@
 			</div>
 		</td>
 <!-- FIN Sélection du secteur (dropdown)-->
+
 
 <!-- DEBUT Sélection de la date-->
 
