@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 //Variables
 extract($_POST, EXTR_OVERWRITE);
 $erreur = array();
@@ -37,7 +39,7 @@ else{
                                 $pass = md5($mdp1);//encryption mot de passe
                         
                                 $req = "INSERT INTO utilisateur (estAdmin, nom, email, nbpoint, prenom, mot_de_passe) 
-                                VALUES ('false','".$nom."', '".$email."', '0', '".$prenom."', '".$pass."')";
+                                VALUES (FALSE,'".$nom."',   '".$prenom."','".$email."', '".$pass."', '0')";
                                 mysqli_query($conn, $req);
 
                                 echo $req;
@@ -62,6 +64,8 @@ else{
         }
 
     }
+
+    $_SESSION[$erreur];
 
 }
 ?>
