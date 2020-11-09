@@ -1,8 +1,12 @@
-<?php if(count($_SESSION[$erreur]) > 0): ?>
 
+<?php if(count($_SESSION['error']) > 0): ?>
+
+    <?php $errors = $_SESSION['error']; ?>
+
+    <p>ok ça marche</p>
     <div class="exception">
-        <?php foreach ($_SESSION[$erreur] as $erreurs): ?>
-            <p><?php echo $erreurs; ?></p>
+        <?php foreach ($errors as $values): ?>
+            <p><?php echo $values; ?></p>
         <?php endforeach ?>
     </div>
     

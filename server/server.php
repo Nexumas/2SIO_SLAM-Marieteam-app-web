@@ -4,7 +4,6 @@ session_start();
 
 //Variables
 extract($_POST, EXTR_OVERWRITE);
-$erreur = array();
 
 //connexion
 $config = parse_ini_file('../admin/db.ini');
@@ -21,11 +20,12 @@ else{
     //si formulaire INSCRIPTION confirmé
     if(isset($_POST['inscription'])){
         
-        $nom = mysqli_real_escape_string($conn, $_POST['nom']);
-        $prenom = mysqli_real_escape_string($conn, $_POST['prenom']);
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $mdp1 = mysqli_real_escape_string($conn, $_POST['mdp']);
-        $mdp2 = mysqli_real_escape_string($conn, $_POST['mdp2']);
+        
+        $nom = htmlspecialchars($conn, $_POST['nom']);
+        $prenom = htmlspecialchars($conn, $_POST['prenom']);
+        $email = htmlspecialchars($conn, $_POST['email']);
+        $mdp1 = htmlspecialchars($conn, $_POST['mdp']);
+        $mdp2 = htmlspecialchars($conn, $_POST['mdp2']);
 
         //gestion champs vide
 
@@ -34,38 +34,20 @@ else{
                 if(!empty($email)){
                     if(!empty($mdp1)){
                         if(!$mdp1 != $mdp2){
-                        if(count($erreur) == 0){
 
                                 $pass = md5($mdp1);//encryption mot de passe
                         
-                                $req = "INSERT INTO utilisateur (estAdmin, nom, email, nbpoint, prenom, mot_de_passe) 
-                                VALUES (FALSE,'".$nom."',   '".$prenom."','".$email."', '".$pass."', '0')";
+                                $req = "INSERT INTO utilisateur (estAdmin, nom, prenom, email, mot_de_passe, nbpoint) 
+                                VALUES (FALSE,'".$nom."', '".$prenom."','".$email."', '".$pass."', '0')";
                                 mysqli_query($conn, $req);
-
-                                echo $req;
-                                
-                                echo '<p>connexion réussie !</p>';
-                            }
-                        
-                        } else {
-                            array_push($erreur, 'La confirmation ne correspond pas au mot de passe !');
+                               
                         }
-                    } else {
-                        array_push($erreur, 'Un mot de passe est requis !');
                     }
-                } else {
-                    array_push($erreur, 'Une adresse email est requise !');
                 }
-            } else {
-                array_push($erreur, 'Le prenom est requis !');  
             }
-        } else {
-            array_push($erreur, 'Le nom est requis !');
         }
 
     }
-
-    $_SESSION[$erreur];
 
 }
 ?>

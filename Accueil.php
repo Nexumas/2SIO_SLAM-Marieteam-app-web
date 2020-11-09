@@ -16,7 +16,7 @@
              Twolf59" >
 
 
-<body style="background-image: url('images/background.jpg'); background-size: cover; background-reapeat: no-repeat;">
+<body style="background: url('imgs/background.jpg'); background-size: cover; background-repeat: no-repeat;">
 
 <!-- DEBUT NAVBAR - navbar créée avec bootstrap -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -53,7 +53,7 @@
 <div style ="height: 100%;">
   <div style="margin: 20%;">
     <div class="text-center">
-      <a href="connection.php" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Se Connecter</a>
+      <a href="connexion.php" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Se Connecter</a>
     </div>
   </div>
 </div>
