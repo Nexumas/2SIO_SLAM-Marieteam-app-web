@@ -34,8 +34,12 @@
 
   <button type="submit" class="btn btn-primary" name="connexion" class="align-content-center">S'inscrire</button>
 
+  <div class="form-group">
+      <a href="inscription.php" style="font-size: 80%;">vous n'avez pas de compte ?</label>
+  </div>
+</body>
+
 </form>
 
-</body>
 
 </html>

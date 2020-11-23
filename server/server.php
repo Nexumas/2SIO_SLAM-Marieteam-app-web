@@ -21,14 +21,13 @@ else{
     if(isset($_POST['inscription'])){
         
         
-        $nom = htmlspecialchars($conn, $_POST['nom']);
-        $prenom = htmlspecialchars($conn, $_POST['prenom']);
-        $email = htmlspecialchars($conn, $_POST['email']);
-        $mdp1 = htmlspecialchars($conn, $_POST['mdp']);
-        $mdp2 = htmlspecialchars($conn, $_POST['mdp2']);
+        $nom = mysqli_real_escape_string($conn, $_POST['nom']);
+        $prenom = mysqli_real_escape_string($conn, $_POST['prenom']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $mdp1 = mysqli_real_escape_string($conn, $_POST['mdp']);
+        $mdp2 = mysqli_real_escape_string($conn, $_POST['mdp2']);
 
         //gestion champs vide
-
         if(!empty($nom)){
             if(!empty($prenom)){
                 if(!empty($email)){
@@ -40,13 +39,38 @@ else{
                                 $req = "INSERT INTO utilisateur (estAdmin, nom, prenom, email, mot_de_passe, nbpoint) 
                                 VALUES (FALSE,'".$nom."', '".$prenom."','".$email."', '".$pass."', '0')";
                                 mysqli_query($conn, $req);
-                               
-                        }
+                                //header('location:Accueil.php');
+                        }   
                     }
                 }
             }
         }
 
+      
+
+    }
+
+    elseif(isset($_POST['connexion'])){
+
+        $emailConn = mysqli_real_escape_string($conn, $_POST['email']);
+        $mdpConn = mysqli_real_escape_string($conn, $_POST['mdp']);
+
+        if(!empty($email)){
+            if(!empty($mdp)){
+
+                $passConn = md5($mdpConn);
+
+                $reqConn = "SELECT (nom, prenom) from utilisateur where '".$emailConn."' = email AND '".$passConn."' = mot_de_passe";
+
+                mysqli_query($conn, $reqConn);
+
+                echo $reqConn;
+
+                if(reqConn){
+
+                }
+            }
+        }
     }
 
 }

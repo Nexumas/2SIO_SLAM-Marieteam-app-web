@@ -1,31 +1,4 @@
 <?php
-session_start();
-$config = parse_ini_file('admin/db.ini');
-$conn = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']) or die(mysqli_error($con));
-mysqli_set_charset ($conn , "utf8");
-
-$erreur = " ";
-$errMdp = " ";
-
-if(mysqli_errno($conn)){
-    header("HTTP/1.1 500 Internal Server Error");
-    //die('Error 403 - Echec de la connexion au serveur !');
-}
-
-if(isset($_POST['inscription'])){
-
-  if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['email']) AND !empty($_POST['mdp'] AND !empty($_POST['mdp2']))){
-    
-
-    
-  }elseif($_POST['mdp'] != $_POST['mdp2']){
-      $errMdp = 'la confirmation de mot de passe doit correspondre ! ';
-    }
-  else{
-    $erreur = 'tous les champs doivent être remplis !';
-  }
-
-}
 
 ?>
 
