@@ -1,8 +1,11 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
 
 body{
-    background: url('imgs/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    font-size: 120%;
+    background: #f8f8ff;
 }
 
 .headform{
@@ -30,4 +33,3 @@ form{
     border-radius: 0px 0px 10px 10px;
 
 }
-
