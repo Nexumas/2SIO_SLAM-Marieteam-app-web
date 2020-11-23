@@ -60,15 +60,20 @@ else{
 
                 $passConn = md5($mdpConn);
 
-                $reqConn = "SELECT (nom, prenom) from utilisateur where '".$emailConn."' = email AND '".$passConn."' = mot_de_passe";
+                $reqConn = $conn->prepare("SELECT (nom, prenom) from utilisateur where ? = email AND ? = mot_de_passe");
+                $reqConn->bind_param("ss",$emailConn, $passConn);
+                $reqConn->execute();
+                //mysqli_query($conn, $reqConn);
 
-                mysqli_query($conn, $reqConn);
+                
+                
+                $value = $reqConn->get_result();
 
-                echo $reqConn;
-
-                if(reqConn){
-
+                while($data = $value->fetch_assoc){
+                    echo $data;
                 }
+
+            
             }
         }
     }

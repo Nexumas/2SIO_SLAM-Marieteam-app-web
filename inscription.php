@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body style="background-image: url('imgs/background.jpg'); background-size: cover; background-repeat: no-repeat;">
 
 <div class="headform">
   <h2>Inscription</h2>
