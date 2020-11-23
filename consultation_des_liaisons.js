@@ -1,7 +1,4 @@
-<?php
-session_start();
-  
-?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -52,69 +49,51 @@ session_start();
 <!-- FIN NAVBAR - navbar créée avec bootstrap -->
 
 <!-- DEBUT Sélection de secteur (dropdown)-->
-<div><table><tbody>
+<table><tbody>
 	<tr>
 		<td>
-    <form method="post" action="serveur/process.php"><div class="dropdown">
+			<div class="dropdown">
 			<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 				Veuillez sélectionner un secteur
 			</button>
 		
 			<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-				<button class="dropdown-item" type="button" name="Sc-001">Poitoux Charente</button>
-				<button class="dropdown-item" type="button" name="Sc-002">Seine-St-Denis</button>
+				<button class="dropdown-item" type="button">Secteur 1</button>
+				<button class="dropdown-item" type="button">Secteur 2</button>
+				<button class="dropdown-item" type="button">...</button>
+				<button class="dropdown-item" type="button">Secteur n</button>
 			</div>
-			</div></form>
+			</div>
 		</td>
 <!-- FIN Sélection du secteur (dropdown)-->
 
 
 <!-- DEBUT Sélection de la date-->
 
+		<td>
 				<!-- Form code begins -->
-				<form method="post" action="server/process.php">
+				<form method="post">
 				<div class="form-group">
-				<td>
-					<input class="form-control" id="date" name="date" placeholder="YYYY/MM/DD" type="text"/>
-				</td>
-				<td>
-					<button class="btn btn-primary " name="submit" type="submit">Submit</button>
-				</td>
+				<table><tbody><tr>
+					<label class="control-label" for="date">Date</label>
+				</tr>
+				<tr>
+					<td>
+						<input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+					</td>
+					<td>
+						<button class="btn btn-primary " name="submit" type="submit">Submit</button>
+					</td>
 				</div>
 				</form>
 				<!-- Form code ends --> 
 
 				</div>
+		</td>
 	</tr>
-</tbody></table></div>
+</tbody></table>
 
 <!-- FIN Sélection de la date-->
-<div>
-<?php
-// $NbrCol : le nombre de colonnes
-// $NbrLigne : le nombre de lignes
-// -------------------------------------------------------
-
-if(isset($_SESSION['res_liai'])) {
-  $res_liai = $_SESSION['res_liai'];
-  $cpt_liai = $_SESSION['cpt_liai'];
-  echo '<table><tr>';
-  echo '<td>| Port de départ |</td>';
-  echo '<td>| Port de destination |</td>';
-  echo '<td>| Distance parcourue (en miles marin) |</td>';
-  echo '<td></td></tr>';
-  for ($i=0; $i<$cpt_liai; $i++) {
-    echo '<tr>';
-    echo '<td>'.$res_liai[$i][1].'</td>';
-    echo '<td>'.$res_liai[$i][2].'</td>';
-    echo '<td>'.$res_liai[$i][3].'</td>';
-    echo '<td><a href="consultation_des_traversees.php">Accéder à la traversée</a>';
-    echo '</tr>';
-  }
-  echo '</table>';
-}
-?>
-</div>
 
 </body>
 </html>

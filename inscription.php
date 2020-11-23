@@ -1,31 +1,4 @@
 <?php
-session_start();
-$config = parse_ini_file('admin/db.ini');
-$conn = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']) or die(mysqli_error($con));
-mysqli_set_charset ($conn , "utf8");
-
-$erreur = " ";
-$errMdp = " ";
-
-if(mysqli_errno($conn)){
-    header("HTTP/1.1 500 Internal Server Error");
-    //die('Error 403 - Echec de la connexion au serveur !');
-}
-
-if(isset($_POST['inscription'])){
-
-  if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['email']) AND !empty($_POST['mdp'] AND !empty($_POST['mdp2']))){
-    
-
-    
-  }elseif($_POST['mdp'] != $_POST['mdp2']){
-      $errMdp = 'la confirmation de mot de passe doit correspondre ! ';
-    }
-  else{
-    $erreur = 'tous les champs doivent être remplis !';
-  }
-
-}
 
 ?>
 
@@ -40,8 +13,7 @@ if(isset($_POST['inscription'])){
 
 </head>
 
-<body style="background-image: url('imgs/background.jpg'); background-size: cover; background-repeat: no-repeat;">
-
+<body>
 
 <div class="headform">
   <h2>Inscription</h2>
@@ -52,26 +24,25 @@ if(isset($_POST['inscription'])){
 
   <div class="form-group">
     <label for="nom">Nom </label>
-    <input type="text" class="form-control" name="nom" placeholder="Entrez votre nom" required>
+    <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom">
   </div>
   <div class="form-group">
-    <label for="prenom">prenom </label>
-    <input type="text" class="form-control" name="prenom" placeholder="Entrez votre prenom" required>
+    <label for="prenom">Nom </label>
+    <input type="text" class="form-control" id="prenom" placeholder="Entrez votre nom">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Email </label>
-    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Entrez votre email" required>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Entrez votre email">
   </div>
   <div class="form-group">
     <label for="mdp">Mot de passe </label>
-    <input type="password" class="form-control" name="mdp" placeholder="Entrez votre mot de passe" required>
+    <input type="password" class="form-control" id="mdp" placeholder="Entrez votre mot de passe">
   </div>
   <div class="form-group">
     <label for="mpd2">Confirmer Mot de passe </label>
-    <input type="password" class="form-control" name="mdp2" placeholder="Confirmer votre mot de passe" required>
+    <input type="password" class="form-control" id="mdp2" placeholder="Confirmer votre mot de passe">
   </div>
   <button type="submit" class="btn btn-primary" name="inscription" class="align-content-center">S'inscrire</button>
-
 </form>
 
 </body>
