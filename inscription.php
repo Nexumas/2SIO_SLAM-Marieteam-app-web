@@ -13,14 +13,23 @@
 
 </head>
 
-<body style="background-image: url('imgs/background.jpg'); background-size: cover; background-repeat: no-repeat;">
+<body>
+
+<div class="header">
+        <h3>MarieTeam</h3>
+    </div>
+    <div class="menu">
+        <a href="Accueil.php">ACCUEIL</a>
+        <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
+        <a href="apropos.php">A PROPOS</a>
+    </div>
 
 <div class="headform">
   <h2>Inscription</h2>
 </div>
 
 
-<form method="post" action="server/server.php">
+<form method="post" action="server/server.php" class="nform">
 
   <div class="form-group">
     <label for="nom">Nom </label>

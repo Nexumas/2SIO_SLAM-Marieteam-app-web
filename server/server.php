@@ -8,7 +8,7 @@ extract($_POST, EXTR_OVERWRITE);
 //connexion
 $config = parse_ini_file('../admin/db.ini');
 
-$conn = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']) or die(mysqli_error($con));
+$conn = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']) or die(mysqli_error($conn));
 mysqli_set_charset ($conn , "utf8");
 
 //message confirmation de connxion -- Test
@@ -36,9 +36,9 @@ else{
 
                                 $pass = md5($mdp1);//encryption mot de passe
                         
-                                $req = "INSERT INTO utilisateur (estAdmin, nom, prenom, email, mot_de_passe, nbpoint) 
-                                VALUES (FALSE,'".$nom."', '".$prenom."','".$email."', '".$pass."', '0')";
-                                mysqli_query($conn, $req);
+                                $req = $conn->prepare("INSERT INTO utilisateur (estAdmin, nom, prenom, email, mot_de_passe, nbpoint) 
+                                VALUES (FALSE,'".$nom."', '".$prenom."','".$email."', '".$pass."', '0')");
+                                $req->execute();
                                 //header('location:Accueil.php');
                         }   
                     }
@@ -63,7 +63,6 @@ else{
                 $reqConn = $conn->prepare("SELECT (nom, prenom) from utilisateur where ? = email AND ? = mot_de_passe");
                 $reqConn->bind_param("ss",$emailConn, $passConn);
                 $reqConn->execute();
-                //mysqli_query($conn, $reqConn);
 
                 
                 

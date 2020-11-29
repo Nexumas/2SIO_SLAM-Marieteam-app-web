@@ -1,9 +1,139 @@
 
-body{
-    background: url('imgs/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+body, html{
 
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+
+}
+
+.header{
+    background: rgba(22, 86, 224, 0.9);
+    padding: 6px 24px;
+    text-align: center;
+    color: white;
+    margin: 0px;
+    letter-spacing: 1px;
+    font: caption;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.header a{
+    float: right;
+    color: white;
+    letter-spacing: 1px;
+    font: caption;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.menu{
+    position: sticky;
+    z-index: 1;
+    top: 0px;
+    background-color: rgb(23, 85, 201);
+    margin: 0px;
+    overflow: hidden;
+}
+
+.menu a{
+    font: menu;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 16px 24px;
+}
+
+.menu a:hover{
+    background: lightblue;
+    color: black;
+
+}
+
+.section-top{
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    animation: slide 20s ease-in infinite;
+    /* animation-duration: 20s, 20s, 20s, 20s; */
+}
+
+.content{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -95%);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.content h1{
+    color: white;
+    font-size: 60px;
+    letter-spacing: 16px;
+}
+
+.content a{
+    background: rgba(22, 86, 224, 0.9);
+    padding: 10px 24px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.content h5{
+    color: white;
+}
+
+p{
+    font-size: 20px;
+    padding: 10px;
+    line-height: 35px;
+}
+
+@keyframes slide{
+    0%{
+        background-image: url(../images/1.jpg);
+    }
+    25%{
+        background-image: url(../images/2.jpg);
+    }
+    50%{
+        background-image: url(../images/3.jpg);
+    }
+    75%{
+        background-image: url(../images/4.jpg);
+    }
+    100%{
+        background-image: url(../images/1.jpg);
+    }
+}
+
+.content-bottom{
+    background: rgba(22, 86, 224, 0.9);
+    position: relative;
+    padding: 0px 24px;
+    text-align: justify;
+    overflow: hidden;
+}
+
+.content-bottom p{
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: auto;
 }
 
 .headform{
@@ -21,7 +151,7 @@ body{
 
 }
 
-form{
+.nform{
     
     width: 40%;
     margin: -80px auto;
