@@ -24,7 +24,6 @@
   <h2>Connexion</h2>
 </div>
 
-
 <form method="post" action="server/server.php" class="nform">
 
   <div class="form-group">
@@ -43,10 +42,9 @@
   <button type="submit" class="btn btn-primary" name="connexion" class="align-content-center">S'inscrire</button>
 
   <div class="form-group">
-      <a href="inscription.php" style="font-size: 80%;">vous n'avez pas de compte ?</label>
+      <a href="inscription.php" style="font-size: 80%;">vous n'avez pas de compte ?</a>
   </div>
-</body>
-
 </form>
 
+</body>
 </html>

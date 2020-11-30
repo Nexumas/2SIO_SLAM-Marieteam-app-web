@@ -1,10 +1,9 @@
 <?php
 
 session_start();
-
 //Variables
 extract($_POST, EXTR_OVERWRITE);
-
+$_SESSION['isConnect'] = false;
 //connexion
 $config = parse_ini_file('../admin/db.ini');
 
@@ -60,14 +59,21 @@ else{
 
                 $passConn = md5($mdpConn);
 
-                $reqConn = $conn->prepare("SELECT (nom, prenom) from utilisateur where '".$email."' = email AND '".$passConn."' = mot_de_passe");
-                $reqConn->execute();
-                
-                
-                $value = $reqConn->get_result();
 
-                while($data = $value->fetch_assoc){
-                    echo $data;
+                $reqConn = $conn->prepare("SELECT * from utilisateur where email = ? AND mot_de_passe = ?");
+                $reqConn->bind_param("ss", $emailConn, $passConn);
+                $reqConn->execute();
+                $result = $reqConn->fetch();
+
+
+
+                if(!$result){
+                    echo 'erreur mot de passe ou email incorrect';
+                }
+                else{
+                    $_SESSION
+                    $_SESSION['isConnect'] = true;
+                    header('location:../Accueil.php');
                 }
 
             
@@ -75,5 +81,11 @@ else{
         }
     }
 
+    elseif(isset($_POST['deconnexion'])){
+
+    }
+
 }
+
+
 ?>

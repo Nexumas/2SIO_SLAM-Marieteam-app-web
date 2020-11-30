@@ -1,6 +1,13 @@
 <?php
 session_start();
-$_SESSION['isconnect'] = true;
+
+if($_SESSION['isConnect'] == true){
+    $conn = true;
+}
+else{
+   $conn = false; 
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +27,7 @@ $_SESSION['isconnect'] = true;
         <a href="Accueil.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
-        <?php if($_SESSION['isconnect'] == true){echo '<a href="">MON COMPTE</a>';} ?>
+        <?php if($conn == true){echo '<a href="">MON COMPTE</a>';} ?>
     </div>
 
     <div class="section-top">
@@ -29,16 +36,16 @@ $_SESSION['isconnect'] = true;
 
            <?php 
 
-           if($_SESSION['isconnect'] == false){
+           if($conn == false){
             echo 
                 '<a href="connexion.php">connexion</a>
                 <h5>ou</h5>
                 <a href="inscription.php">s inscrire</a>'; 
              }
             else{
-                echo '<a href="">Mon compte</a>';
+                echo '<a href="user/compte.php">Mon compte</a>';
             }   
-                ?>
+            ?>
             
         </div>
        
