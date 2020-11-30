@@ -60,10 +60,8 @@ else{
 
                 $passConn = md5($mdpConn);
 
-                $reqConn = $conn->prepare("SELECT (nom, prenom) from utilisateur where ? = email AND ? = mot_de_passe");
-                $reqConn->bind_param("ss",$emailConn, $passConn);
+                $reqConn = $conn->prepare("SELECT (nom, prenom) from utilisateur where '".$email."' = email AND '".$passConn."' = mot_de_passe");
                 $reqConn->execute();
-
                 
                 
                 $value = $reqConn->get_result();
