@@ -22,11 +22,17 @@ if(isset($_POST['submit'])){
 
     $date1 = $_POST['date'];
     $date = date ("Y/m/d H:i:s", strtotime ($date1));
+    if(isset($_SESSION['secteur'])){
+        $secteur = $_SESSION['secteur'];
+    }
+    else{
+        $secteur = 'Sc001';
+    }
 
     if(!empty($date) /** && !empty($secteur)*/){
 
-        $req = $conn->prepare("SELECT * FROM liaison AS L, traverse AS T WHERE L.idLiaison = T.idLiaison AND T.dateDepart = ?");
-        $req->bind_param("s",$date);
+        $req = $conn->prepare("SELECT * FROM liaison AS L, traverse AS T WHERE L.idLiaison = T.idLiaison AND T.dateDepart = ? AND L.idSecteur = ?");
+        $req->bind_param("ss",$date, $secteur);
         $req->execute();
         $compt = 0;
         $res = array();
@@ -55,11 +61,35 @@ if(isset($_POST['submit'])){
 }
 
 if(isset($_POST['Sc001'])){
-    $secteur = 'Sc001';
+    $_SESSION['secteur'] = 'Sc001';
 }
 
 if(isset($_POST['Sc002'])){
-    $secteur = 'Sc002';
+    $_SESSION['secteur'] = 'Sc002';
+}
+
+if(isset($_POST['nId'])){
+    $nId = $_POST['nId'];
+    $res = array();
+    $pour_trav = $_SESSION['pour_trav'];
+    $id = $pour_trav[$nId][4];
+    echo $id;
+
+    $req = "SELECT * FROM traverse WHERE idTraverse = ?";
+    mysqli_bind_param($stmt, "s", $id);
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $req)){
+        echo 'Échec lors de la préparation de la requête';
+    }
+    else{
+        $value = mysqli_getresult($stmt);
+        while($data = mysqli_fetch_array($value)){
+            $res = array_push($data['idTraverse'], $data['dateDepart'], $data['heureDepart'], $data['duree'], $data['idLiaison'], $data['idBateau']);
+        }
+        $_SESSION['res_trav'] = $res;
+        header('../consultation_des_traversees.php');
+    }
+    
 }
 
 ?>
