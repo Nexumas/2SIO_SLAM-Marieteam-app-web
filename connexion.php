@@ -39,7 +39,7 @@
   <label for="scales">Se souvenir de moi</label>
   </div>
 
-  <button type="submit" class="btn btn-primary" name="connexion" class="align-content-center">S'inscrire</button>
+  <button type="submit" class="btn btn-primary" name="connexion" class="align-content-center">Se connecter</button>
 
   <div class="form-group">
       <a href="inscription.php" style="font-size: 80%;">vous n'avez pas de compte ?</a>
