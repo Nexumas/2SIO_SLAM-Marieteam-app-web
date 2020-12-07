@@ -22,14 +22,9 @@ if(isset($_POST['submit'])){
 
     $date1 = $_POST['date'];
     $date = date ("Y/m/d H:i:s", strtotime ($date1));
-    if(isset($_SESSION['secteur'])){
-        $secteur = $_SESSION['secteur'];
-    }
-    else{
-        $secteur = 'Sc001';
-    }
+	$secteur = $_POST['secteur'];
 
-    if(!empty($date) /** && !empty($secteur)*/){
+    if(!empty($date) && !empty($secteur)){
 
         $req = $conn->prepare("SELECT * FROM liaison AS L, traverse AS T WHERE L.idLiaison = T.idLiaison AND T.dateDepart = ? AND L.idSecteur = ?");
         $req->bind_param("ss",$date, $secteur);
@@ -47,12 +42,12 @@ if(isset($_POST['submit'])){
 
         //stocke les résultats dans un tableau à 2 dimensions
         while ($data = $value->fetch_assoc()){
-            array_push($res, array($compt, $data ['portDepart'], $data['portArrive'], $data['distanceMileMarin'], $data['idTraverse']));
+            array_push($res, array($compt, $data['portDepart'], $data['portArrive'], $data['distanceMileMarin'], $data['idTraverse']));
             $compt = $compt+1;
         }
         $_SESSION['res_liai'] = $res;
         $_SESSION['cpt_liai'] = $compt;
-        header('location:../consultation_des_liaisons.php');
+        header('location: ../consultation_des_liaisons.php');
         
     }else{
         echo 'Probleme: variable(s) nulle(s)';
@@ -60,36 +55,38 @@ if(isset($_POST['submit'])){
 
 }
 
-if(isset($_POST['Sc001'])){
-    $_SESSION['secteur'] = 'Sc001';
-}
-
-if(isset($_POST['Sc002'])){
-    $_SESSION['secteur'] = 'Sc002';
-}
-
 if(isset($_POST['nId'])){
     $nId = $_POST['nId'];
     $res = array();
     $pour_trav = $_SESSION['pour_trav'];
     $id = $pour_trav[$nId][4];
-    echo $id;
 
-    $req = "SELECT * FROM traverse WHERE idTraverse = ?";
-    mysqli_bind_param($stmt, "s", $id);
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $req)){
-        echo 'Échec lors de la préparation de la requête';
+    $req = $conn->prepare("SELECT * From traverse AS T, liaison AS L, bateau AS B WHERE T.idLiaison = L.idLiaison AND T.idBateau = B.idBateau AND T.idTraverse = ?");
+    $req->bind_param("s", $id);
+	$req->execute();
+    $value = $req->get_result();
+	
+    while($data = $value->fetch_assoc()){
+		$nom = $data['portDepart'].'-'.$data['portArrive'];
+        array_push($res, $nom, $data['idTraverse'], $data['dateDepart'], $data['heureDepart'], $data['duree'], $data['nom'], $data['idLiaison'], $data['idBateau']);
     }
-    else{
-        $value = mysqli_getresult($stmt);
-        while($data = mysqli_fetch_array($value)){
-            $res = array_push($data['idTraverse'], $data['dateDepart'], $data['heureDepart'], $data['duree'], $data['idLiaison'], $data['idBateau']);
-        }
-        $_SESSION['res_trav'] = $res;
-        header('../consultation_des_traversees.php');
-    }
-    
+    $_SESSION['res_trav'] = $res;	
+	header('location: ../consultation_des_traversees.php');
 }
 
+if(isset($_POST['modif'])){
+	$idTraverse = $_POST['idTraverse'];
+	$dateDepart = $_POST['date'];
+	$heureDepart = $_POST['heure'];
+	$duree = $_POST['duree'];
+	$idLiaison = $_POST['idLiaison'];
+	$idBateau = $_POST['idBateau'];
+	
+	$req = $conn->prepare("UPDATE traverse SET dateDepart = ?, heureDepart = ?, duree = ?, idLiaison = ?, idBateau = ? WHERE idTraverse = ?");
+	$req->bind_param("ssisss", $dateDepart, $heureDepart, $duree, $idLiaison, $idBateau, $idTraverse);
+	$req->execute();
+	
+	unset($_SESSION['res_trav']);
+	header('location: ../admin/modification_traversees.php');
+}
 ?>

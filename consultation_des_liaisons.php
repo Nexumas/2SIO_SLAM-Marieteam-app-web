@@ -1,6 +1,6 @@
 <?php
-session_start();
-  
+	session_start();
+	
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,16 +55,11 @@ session_start();
 <div><table><tbody>
 	<tr>
 		<td>
-    <form method="post" action="serveur/process.php"><div class="dropdown">
-			<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				Veuillez sélectionner un secteur
-			</button>
-		
-			<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-				<button class="dropdown-item" type="button" name="Sc-001">Poitoux Charente</button>
-				<button class="dropdown-item" type="button" name="Sc-002">Seine-St-Denis</button>
-			</div>
-			</div></form>
+    <form method="post" action="server/process.php">
+			<p>Veuillez Selectionner un secteur : <select name="secteur">
+				<option value="Sc-001" >Poitoux Charente</button>
+				<option value="Sc-002" >Seine-St-Denis</button>
+			</p>
 		</td>
 <!-- FIN Sélection du secteur (dropdown)-->
 
@@ -72,13 +67,12 @@ session_start();
 <!-- DEBUT Sélection de la date-->
 
 				<!-- Form code begins -->
-				<form method="post" action="server/process.php">
 				<div class="form-group">
 				<td>
 					<input class="form-control" id="date" name="date" placeholder="YYYY/MM/DD" type="text"/>
 				</td>
 				<td>
-					<button class="btn btn-primary " name="submit" type="submit">Submit</button>
+					<button class="btn btn-primary" name="submit" type="submit">Submit</button>
 				</td>
 				</div>
 				</form>
@@ -114,7 +108,7 @@ if(isset($_SESSION['res_liai'])) {
     echo '</tr>';
   }
   echo '</table>';
-  $_SESSION['pour_trav'] = $res_liai;
+  $_SESSION['pour_trav'] = $_SESSION['res_liai'];
   unset($_SESSION['res_liai']);
 }
 ?>
