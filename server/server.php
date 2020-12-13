@@ -1,45 +1,54 @@
 <?php
 
 session_start();
+
 //Variables
 extract($_POST, EXTR_OVERWRITE);
+
 //connexion
 $config = parse_ini_file('../admin/db.ini');
 
 $conn = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']) or die(mysqli_error($conn));
-mysqli_set_charset ($conn , "utf8");
+$conn->set_charset('utf8');
 
-//message confirmation de connxion -- Test
+//message confirmation de connexion -- Test
 if(mysqli_errno($conn)){
     header("HTTP/1.1 500 Internal Server Error");
-    //die('Error 403 - Echec de la connexion au serveur !');
 }
+
 else{
-    //si formulaire INSCRIPTION confirmé
+
+    //inscription
     if(isset($_POST['inscription'])){
         
         
-        $nom = mysqli_real_escape_string($conn, $_POST['nom']);
-        $prenom = mysqli_real_escape_string($conn, $_POST['prenom']);
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $mdp1 = mysqli_real_escape_string($conn, $_POST['mdp']);
-        $mdp2 = mysqli_real_escape_string($conn, $_POST['mdp2']);
+        $nomLogin = $conn->real_escape_string($_POST['nom']);
+        $prenomLogin = $conn->real_escape_string($_POST['prenom']);
+        $emailLogin = $conn->real_escape_string($_POST['email']);
+        $mdp1Login = $conn->real_escape_string($_POST['mdp']);
+        $mdp2Login = $conn->real_escape_string($_POST['mdp2']);
 
         //gestion champs vide
-        if(!empty($nom)){
-            if(!empty($prenom)){
-                if(!empty($email)){
-                    if(!empty($mdp1)){
-                        if(!empty($mdp2) && $mdp1 == $mdp2){
+        if(!empty($nomLogin)){
+            if(!empty($prenomLogin)){
+                if(!empty($emailLogin)){
+                    if(!empty($mdp1Login)){
+                        if(!empty($mdp2Login) && $mdp1Login == $mdp2Login){
 
-                                $pass = md5($mdp1);//encryption mot de passe
+                            try{
+
+                                $passLogin = md5($mdp1Login);//encryption mot de passe
                         
-                                $req = $conn->prepare("INSERT INTO utilisateur (estAdmin, nom, prenom, email, mot_de_passe)
+                                $reqLogin = $conn->prepare("INSERT INTO utilisateur (estAdmin, nom, prenom, email, mot_de_passe)
                                 VALUES (?,?,?,?,?)");
-                                $req->bind_param("isssss", intval(FALSE), $nom, $prenom, $email, $pass, $email);
-                                $req->execute();
+                                $reqLogin->bind_param("isssss", intval(FALSE), $nomLogin, $prenomLogin, $emailLogin, $passLogin, $emailLogin);
+                                $reqLogin->execute();
 
                                 header('Location:../connexion.php');
+
+                            }catch(Exception $e){
+                                echo $e->getMessage();
+                            }
    
                         }else{
                             header('Location:../inscription.php');
@@ -49,55 +58,63 @@ else{
             }
         }
 
-      
-
     }
 
+    //connexion
     elseif(isset($_POST['connexion'])){
 
-        $emailConn = mysqli_real_escape_string($conn, $_POST['email']);
-        $mdpConn = mysqli_real_escape_string($conn, $_POST['mdp']);
+        $emailConn = $conn->real_escape_string($_POST['email']);
+        $mdpConn = $conn->real_escape_string($_POST['mdp']);
 
-        if(!empty($email)){
-            if(!empty($mdp)){
+        if(!empty($emailConn)){
+            if(!empty($mdpConn)){
 
-                $passConn = md5($mdpConn);
+                try{
 
-                $reqConn = $conn->prepare("SELECT * from utilisateur where email = ? AND mot_de_passe = ?");
-                $reqConn->bind_param("ss", $emailConn, $passConn);
-                $reqConn->execute();
-                $result = $reqConn->get_result();
+                    $passConn = md5($mdpConn);//encryption mot de passe
 
-                $value = array();
+                    //requete vérification compte utilisateur
+                    $reqConn = $conn->prepare("SELECT * from utilisateur where email = ? AND mot_de_passe = ?");
+                    $reqConn->bind_param("ss", $emailConn, $passConn);
+                    $reqConn->execute();
 
-                if($result){
-                    while($data = $result->fetch_assoc()){
-                      if($data['email'] != $emailConn){
-                        header('location:../Accueil.php');
-                      }else{
-                      array_push($value, $data['nom'], $data['prenom'], $data['email']);
-                      $_SESSION['userName'] = $data['nom'];
-                      $_SESSION['nbPoint'] = $data['nbPoint'];
-                      $_SESSION['amdin'] = $data['estAdmin'];
+                    $resultConn = $reqConn->get_result();//recupere le resultat
+                    $fetchConn = $resultConn->fetch_assoc();//fetch resultat
+
+                    //resultats stockées dans un array si requete réussie
+                    if($resultConn){
+                        if($fetchConn['email'] != null && $fetchConn['mot_de_passe'] != null){
+
+                            $tab_User = array();//declaration tableau 
+
+                            array_push($tab_User, $fetchConn['nom'], $fetchConn['prenom'], $fetchConn['email']);
+
+                            $_SESSION['userName'] = $fetchConn['nom'];
+                            $_SESSION['nbPoint'] = $fetchConn['nbPoint'];
+                            $_SESSION['amdin'] = $fetchConn['estAdmin'];
+                        
+                            $_SESSION['loggedin'] = true;//passe la variable de verification a true
+                            $_SESSION['user'] = $tab_User;//stocke les données utilisateur
+
+                            header('location:../Accueil.php');
+                        } 
+                        else{
+                            header('Location:../connexion.php');
+                        }   
                     }
-                  }
-                  $_SESSION['loggedin'] = true;
-                  $_SESSION['user'] = $value;
-                  header('location:../Accueil.php');
-                }
-                elseif(!$result){
-                    echo 'erreur mot de passe ou email incorrect';
+                    else if(!$resultConn){
+                        header('Location:../connexion.php');
+                    }
+                }catch(Exception $e){
+                    echo $e->getMessage();
                 }
 
-            }
+            }       
         }
-    }
-
-    elseif(isset($_POST['deconnexion'])){
 
     }
-
 }
 
+$conn->close();
 
 ?>

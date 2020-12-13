@@ -17,7 +17,7 @@
 
 <div class="header">
         <h3>MarieTeam</h3>
-    </div>
+</div>
     <div class="menu">
         <a href="Accueil.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>

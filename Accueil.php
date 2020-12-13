@@ -27,9 +27,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <a href="Accueil.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
-        <?php if($isConn == true){echo '<a href=""> COMPTE: ' . $nameUser . '</a>';
-                                  echo '<a href="server/deconnexion.php">DECONNEXION</a>';
-        } ?>
     </div>
 
     <div class="section-top">
@@ -45,7 +42,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 <a href="inscription.php">s inscrire</a>'; 
              }
             else{
-                echo '<a href="user/compte.php">COMPTE: ' . $nameUser .'</a>';
+                echo '<a href="user/compte.php">COMPTE: ' . $nameUser .'</a>;
+                <h5>ou</h5>
+                <a href="server/deconnexion.php">SE DECONNETER</a>';
             }   
             ?>
             
