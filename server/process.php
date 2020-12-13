@@ -6,7 +6,7 @@ extract($_POST, EXTR_OVERWRITE);
 //connexion
 $conf = parse_ini_file('../admin/db.ini');
 
-$conn = mysqli_connect($conf['host'], $conf['user'], $conf['password'], $conf['database']) or die(msqli_error($conn));
+$conn = mysqli_connect($conf['host'], $conf['user'], $conf['password'], $conf['database']) or die(mysqli_error($conn));
 mysqli_set_charset($conn, "utf8");
 
 //initialisation variables
@@ -21,7 +21,7 @@ if(mysqli_errno($conn)){
 if(isset($_POST['submit'])){
 
     $date1 = $_POST['date'];
-    $date = date ("Y/m/d H:i:s", strtotime ($date1));
+    $date = date ("Y/m/d", strtotime ($date1));
 	$secteur = $_POST['secteur'];
 
     if(!empty($date) && !empty($secteur)){
@@ -75,16 +75,37 @@ if(isset($_POST['nId'])){
 }
 
 if(isset($_POST['modif'])){
-	$idTraverse = $_POST['idTraverse'];
-	$dateDepart = $_POST['date'];
-	$heureDepart = $_POST['heure'];
-	$duree = $_POST['duree'];
-	$idLiaison = $_POST['idLiaison'];
-	$idBateau = $_POST['idBateau'];
+	$idTraverse = $_SESSION['res_trav'][1];
+	if(!empty($_POST['date'])){
+		$dateDepart1 = $_POST['date'];
+		$dateDepart = date ("Y/m/d", strtotime($dateDepart1));
+	}else{
+		$dateDepart = $_SESSION['res_trav'][2];
+	}
+	if(!empty($_POST['heure'])){
+	$heureDepart1 = $_POST['heure'];
+	$heureDepart = date ("H:i:s", strtotime($heureDepart1));
+	}else{
+		$heureDepart = $_SESSION['$res_trav'][3];
+	}
+	if(!empty($_POST['duree'])){
+		$duree = $_POST['duree'];
+	}else{
+		$duree = $_SESSION['$res_trav'][4];
+	}
+	if(!empty($_POST['idLiaison'])){
+		$idLiaison = $_POST['idLiaison'];
+	}else{
+		$idLiaison = $_SESSION['$res_trav'][6];
+	}
+	if(!empty($_POST['idBateau'])){
+		$idBateau = $_POST['idBateau'];
+	}else{
+		$idBateau = $_SESSION['$res_trav'][7];
+	}
 	
-	$req = $conn->prepare("UPDATE traverse SET dateDepart = ?, heureDepart = ?, duree = ?, idLiaison = ?, idBateau = ? WHERE idTraverse = ?");
-	$req->bind_param("ssisss", $dateDepart, $heureDepart, $duree, $idLiaison, $idBateau, $idTraverse);
-	$req->execute();
+	$req = '"UPDATE traverse SET dateDepart = "'.$dateDepart.'", heureDepart = "'.$heureDepart.'", duree = '.$duree.', idLiaison = "'.$idLiaison.'", idBateau = "'.$idBateau.'" WHERE idTraverse = '.$idTraverse.'"';
+	$conn->query($req);
 	
 	unset($_SESSION['res_trav']);
 	header('location: ../admin/modification_traversees.php');

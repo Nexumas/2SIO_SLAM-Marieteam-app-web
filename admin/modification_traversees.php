@@ -56,14 +56,13 @@
 if(isset($_SESSION['res_trav'])){
   $res_trav = $_SESSION['res_trav'];
   echo '<p>'.$res_trav[0].'</p>';
-  echo '<from method="post" action="server/process.php">';
+  echo '<form method="post" action="../server/process.php">';
   echo '<div class="form-group">';
-  echo '<p>idTraversé : '.$res_trav[1].'</p><input class="form-control" id="idTraverse" name="idTraverse" placeholder="'.$res_trav[1].'" type="hidden"/>';
-  echo '<p>Date du départ : </p><input class="form-control" id="date" name="date" placeholder="'.$res_trav[2].'" type="text"/>';
-  echo '<p>Heure du départ : </p><input class="form-control" id="heure" name="heure" placeholder="'.$res_trav[3].'" type="text"/>';
-  echo '<p>Durée de la traversé : </p><input class="form-control" id="duree" name="duree" placeholder="'.$res_trav[4].'" type="text"/><p> minutes</p>';
-  echo '<p>idLiaison : </p><input class="form-control" id="idLiaison" name="idLiaison" placeholder="'.$res_trav[6].'" type="text"/>';
-  echo '<p>idBateau : </p><input class="form-control" id="idBateau" name="idBateau" placeholder="'.$res_trav[7].'" type="text"/>';
+  echo '<p>Date du départ : </p><input name="date" placeholder="'.$res_trav[2].'" type="text"/>';
+  echo '<p>Heure du départ : </p><input name="heure" placeholder="'.$res_trav[3].'" type="text"/>';
+  echo '<p>Durée de la traversé : </p><input name="duree" placeholder="'.$res_trav[4].'" type="text"/><p> minutes</p>';
+  echo '<p>idLiaison : </p><input name="idLiaison" placeholder="'.$res_trav[6].'" type="text"/>';
+  echo '<p>idBateau : </p><input name="idBateau" placeholder="'.$res_trav[7].'" type="text"/>';
   echo '<button class="btn btn-primary" name="modif" type="submit">Modifier</button></div></form>';
 }
 else{
