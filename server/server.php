@@ -41,7 +41,7 @@ else{
                         
                                 $reqLogin = $conn->prepare("INSERT INTO utilisateur (estAdmin, nom, prenom, email, mot_de_passe)
                                 VALUES (?,?,?,?,?)");
-                                $reqLogin->bind_param("isssss", intval(FALSE), $nomLogin, $prenomLogin, $emailLogin, $passLogin, $emailLogin);
+                                $reqLogin->bind_param("issss", intval(FALSE), $nomLogin, $prenomLogin, $emailLogin, $passLogin);
                                 $reqLogin->execute();
 
                                 header('Location:../connexion.php');
