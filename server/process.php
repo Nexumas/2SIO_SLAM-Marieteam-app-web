@@ -57,7 +57,8 @@ if(isset($_POST['submit'])){
 
 if(isset($_POST['nId'])){
     $nId = $_POST['nId'];
-    $res = array();
+	$res = array();
+	$tarif = array();
     $pour_trav = $_SESSION['pour_trav'];
     $id = $pour_trav[$nId][4];
 
@@ -70,21 +71,29 @@ if(isset($_POST['nId'])){
 		$nom = $data['portDepart'].'-'.$data['portArrive'];
         array_push($res, $nom, $data['idTraverse'], $data['dateDepart'], $data['heureDepart'], $data['duree'], $data['nom'], $data['idLiaison'], $data['idBateau']);
     }
-    $_SESSION['res_trav'] = $res;	
+	$_SESSION['res_trav'] = $res;
+
+	$req = $conn->prepare("SELECT * From Type AS Ty, Tarif AS Ta, Traverse AS Tr WHERE Ty.idType = Ta.idType AND Tr.idLiaison = Ta.idLiaison AND Tr.idPeriode = Ta.idPeriode AND Tr.idTraverse = ?");
+	$req->bind_param("s", $id);
+	$req->execute();
+	$value = $req->get_result();
+
+	while($data = $value->fetch_assoc()){
+		array_push($tarif, $data['libelle'], $data['prixUnite']);
+	}
+	$_SESSION['tarif'] = $tarif;	
 	header('location: ../consultation_des_traversees.php');
 }
 
 if(isset($_POST['modif'])){
 	$idTraverse = $_SESSION['res_trav'][1];
 	if(!empty($_POST['date'])){
-		$dateDepart1 = $_POST['date'];
-		$dateDepart = date ("Y/m/d", strtotime($dateDepart1));
+		$dateDepart = $_POST['date'];
 	}else{
 		$dateDepart = $_SESSION['res_trav'][2];
 	}
 	if(!empty($_POST['heure'])){
-	$heureDepart1 = $_POST['heure'];
-	$heureDepart = date ("H:i:s", strtotime($heureDepart1));
+		$heureDepart = $_POST['heure'];
 	}else{
 		$heureDepart = $_SESSION['$res_trav'][3];
 	}
