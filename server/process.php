@@ -59,6 +59,7 @@ if(isset($_POST['nId'])){
     $nId = $_POST['nId'];
 	$res = array();
 	$tarif = array();
+	$tarif_reserv = array(); //tableau tarif pour traitement reservation - ne le supprime pas !!!!
     $pour_trav = $_SESSION['pour_trav'];
     $id = $pour_trav[$nId][4];
 
@@ -80,8 +81,10 @@ if(isset($_POST['nId'])){
 
 	while($data1 = $value1->fetch_assoc()){
 		array_push($tarif, array($data1['libelle'], $data1['prixUnite']));
+		array_push($tarif_reserv, $data1['prixUnite']);//ne pas supprimer
 	}
 	$_SESSION['tarif'] = $tarif;
+	$_SESSION['tarif_reserv'] = $tarif_reserv; // ne pas supprimer
 	header('location: ../consultation_des_traversees.php');
 }
 

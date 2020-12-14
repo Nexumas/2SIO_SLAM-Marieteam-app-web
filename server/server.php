@@ -92,6 +92,7 @@ else{
                             $_SESSION['userName'] = $fetchConn['nom'];
                             $_SESSION['nbPoint'] = $fetchConn['nbPoint'];
                             $_SESSION['admin'] = $fetchConn['estAdmin'];
+                            $_SESSION['idUser'] = $fetchConn['idUtilisateur'];
                         
                             $_SESSION['loggedin'] = true;//passe la variable de verification a true
                             $_SESSION['user'] = $tab_User;//stocke les données utilisateur

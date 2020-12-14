@@ -33,7 +33,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     </div>
 
 <?php 
-
+echo '<form method="post" action="server/gestion_reservation.php">';
 echo '<div class="reserv_header">';
 echo '<p>Liaison : ' . $_SESSION['res_trav'][0] . '</p>';
 echo '<p>Traverse : ' . $_SESSION['res_trav'][2] . ' ' . $_SESSION['res_trav'][3] .'</p>';
@@ -50,13 +50,12 @@ $tabTarif = $_SESSION['tarif'];
 for($i = 0; $i < count($tabTarif); $i++){
     echo '<tr>
     <td align="center">' . $tabTarif[$i][0] . '</td>
-    <td align="center">'. $tabTarif[$i][1] .'</td>
+    <td align="center">'. $tabTarif[$i][1] .' €</td>
+    <td><input type="number" name="quantite'.$i.'" placeholder="quantite"></td>
     </tr>';
 }
 echo '</table>';
 
-echo '
-<form method="post" action="../server/gestion_reservation.php">
-<button class="btn_reserv" type="submit" name="reserver">Reserver</button>
+echo '<button class="btn_reserv" type="submit" name="reserver">Reserver</button>
 </form>';
 ?>
