@@ -69,7 +69,7 @@ if(isset($_POST['nId'])){
 	
     while($data = $value->fetch_assoc()){
 		$nom = $data['portDepart'].'-'.$data['portArrive'];
-        array_push($res, $nom, $data['idTraverse'], $data['dateDepart'], $data['heureDepart'], $data['duree'], $data['nom'], $data['idLiaison'], $data['idBateau']);
+        array_push($res, $nom, $data['idTraverse'], $data['dateDepart'], $data['heureDepart'], $data['duree'], $data['nom'], $data['idLiaison'], $data['idBateau'], $data['idPeriode']);
     }
 	$_SESSION['res_trav'] = $res;
 
@@ -90,30 +90,35 @@ if(isset($_POST['modif'])){
 	if(!empty($_POST['date'])){
 		$dateDepart = $_POST['date'];
 	}else{
-		$dateDepart = $_SESSION['res_trav'][2];
+		$dateDepart = strval($_SESSION['res_trav'][2]);
 	}
 	if(!empty($_POST['heure'])){
 		$heureDepart = $_POST['heure'];
 	}else{
-		$heureDepart = $_SESSION['$res_trav'][3];
+		$heureDepart = strval($_SESSION['res_trav'][3]);
 	}
 	if(!empty($_POST['duree'])){
 		$duree = $_POST['duree'];
 	}else{
-		$duree = $_SESSION['$res_trav'][4];
+		$duree = $_SESSION['res_trav'][4];
 	}
 	if(!empty($_POST['idLiaison'])){
 		$idLiaison = $_POST['idLiaison'];
 	}else{
-		$idLiaison = $_SESSION['$res_trav'][6];
+		$idLiaison = $_SESSION['res_trav'][6];
 	}
 	if(!empty($_POST['idBateau'])){
 		$idBateau = $_POST['idBateau'];
 	}else{
-		$idBateau = $_SESSION['$res_trav'][7];
+		$idBateau = $_SESSION['res_trav'][7];
+	}
+	if(!empty($_POST['idPeriode'])){
+		$idBateau = $_POST['idPeriode'];
+	}else{
+		$idBateau = $_SESSION['res_trav'][8];
 	}
 	
-	$req = '"UPDATE traverse SET dateDepart = "'.$dateDepart.'", heureDepart = "'.$heureDepart.'", duree = '.$duree.', idLiaison = "'.$idLiaison.'", idBateau = "'.$idBateau.'" WHERE idTraverse = '.$idTraverse.'"';
+	$req = 'UPDATE traverse SET dateDepart = "'.$dateDepart.'", heureDepart = "'.$heureDepart.'", duree = '.$duree.', idLiaison = "'.$idLiaison.'", idBateau = "'.$idBateau.'" WHERE idTraverse = "'.$idTraverse.'"';
 	$conn->query($req);
 	
 	unset($_SESSION['res_trav']);

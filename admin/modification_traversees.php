@@ -63,6 +63,7 @@ if(isset($_SESSION['res_trav'])){
   echo '<p>Durée de la traversé : </p><input name="duree" placeholder="'.$res_trav[4].'" type="text"/><p> minutes</p>';
   echo '<p>idLiaison : </p><input name="idLiaison" placeholder="'.$res_trav[6].'" type="text"/>';
   echo '<p>idBateau : </p><input name="idBateau" placeholder="'.$res_trav[7].'" type="text"/>';
+  echo '<p>idPeriode : </p><input name="idPeriode" placeholder="'.$res_trav[8].'" type="text"/>';
   echo '<button class="btn btn-primary" name="modif" type="submit">Modifier</button></div></form>';
 }
 else{
