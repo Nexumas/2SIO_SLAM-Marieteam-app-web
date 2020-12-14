@@ -79,7 +79,7 @@ if(isset($_POST['nId'])){
 	$value1 = $req1->get_result();
 
 	while($data1 = $value1->fetch_assoc()){
-		array_push($tarif, $data1['libelle'], $data1['prixUnite']);
+		array_push($tarif, array($data1['libelle'], $data1['prixUnite']));
 	}
 	$_SESSION['tarif'] = $tarif;
 	header('location: ../consultation_des_traversees.php');
