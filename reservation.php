@@ -44,27 +44,16 @@ echo '<table class="tab_tarif"><tr>
 <th>| Passager |</th>
 <th>| Tarifs   |</th>
 </tr>';
-echo '<tr>
-<td align="center">Adulte</td>
-<td></td>
-</tr>';
-echo '<tr>
-<td align="center">Junior</td>
-<td></td>
-</tr>';
-echo '<tr>
-<td align="center">Enfant</td>
-<td></td>
-</tr>';
-echo '<tr>
-<td align="center">Voiture</td>
-<td></td>
-</tr>';
-echo '<tr>
-<td align="center">Fourgon</td>
-<td></td>
-</tr></table></br>';
-echo '</div>';
+
+$tabTarif = $_SESSION['tarif'];
+
+for($i = 0; $i < count($tabTarif); $i++){
+    echo '<tr>
+    <td align="center">' . $tabTarif[$i][0] . '</td>
+    <td align="center">'. $tabTarif[$i][1] .'</td>
+    </tr>';
+}
+echo '</table>';
 
 echo '
 <form method="post" action="../server/gestion_reservation.php">
