@@ -20,39 +20,29 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 <body>
 
 <?php if($isConn == true){
-
     echo '<div class="header">
-    <h3>MarieTeam</h3>
+        <h3>MarieTeam</h3>
     </div>
     <div class="menu">
-    <a href="../Accueil.php">ACCUEIL</a>
-    <a href="../consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
-    <a href="../apropos.php">A PROPOS</a>
-    <a href="../server/deconnexion.php">DECONNEXION</a>
+        <a href="Accueil.php">ACCUEIL</a>
+        <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
+        <a href="apropos.php">A PROPOS</a>
+        <a href=""> COMPTE: ' . $_SESSION['userName'] . '</a>
+        <a href="../server/deconnexion.php">DECONNEXION</a>
     </div>';
 
     $i = 0;
     $tab = $_SESSION['user'];
 
     while($i < count($tab)){
-        switch($i){
-            case $i == 0 && $i == 1:
-                echo 'Nom : ' . $tab[$i] . '</br>';
-                break;
-            case $i == 1:
-                echo 'Prenom : ' . $tab[$i] . '</br>';
-                break;
-            case $i == 2:
-                echo 'email : ' . $tab[$i] . '</br>';
-                break;
-        }
+        echo $tab[$i] . '</br>';
         $i = $i + 1;
     }
-    echo 'Points de fidélité : ' . $_SESSION['nbPoint'] . '</br>';
+    echo $_SESSION['nbPoint'];
 
 }
 
 else{
-    header('Location:../connexion.php');
+    die ('lol ... you are not loged ...');
 }
  ?>
