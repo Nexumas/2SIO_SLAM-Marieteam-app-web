@@ -33,6 +33,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     </div>
 
 <?php 
+
 echo '<div class="reserv_header">';
 echo '<p>Liaison : ' . $_SESSION['res_trav'][0] . '</p>';
 echo '<p>Traverse : ' . $_SESSION['res_trav'][2] . ' ' . $_SESSION['res_trav'][3] .'</p>';

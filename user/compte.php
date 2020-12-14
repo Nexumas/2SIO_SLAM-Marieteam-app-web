@@ -36,13 +36,13 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     while($i < count($tab)){
         switch($i){
             case $i == 0 && $i == 1:
-                echo 'Nom : ' . $tab[$i];
+                echo 'Nom : ' . $tab[$i] . '</br>';
                 break;
             case $i == 1:
-                echo 'Prenom : ' . $tab[$i];
+                echo 'Prenom : ' . $tab[$i] . '</br>';
                 break;
             case $i == 2:
-                echo 'email : ' . $tab[$i];
+                echo 'email : ' . $tab[$i] . '</br>';
                 break;
         }
         $i = $i + 1;
