@@ -73,15 +73,15 @@ if(isset($_POST['nId'])){
     }
 	$_SESSION['res_trav'] = $res;
 
-	$req = $conn->prepare("SELECT * From Type AS Ty, Tarif AS Ta, Traverse AS Tr WHERE Ty.idType = Ta.idType AND Tr.idLiaison = Ta.idLiaison AND Tr.idPeriode = Ta.idPeriode AND Tr.idTraverse = ?");
-	$req->bind_param("s", $id);
-	$req->execute();
-	$value = $req->get_result();
+	$req1 = $conn->prepare("SELECT * From TypePlace AS Ty, Tarif AS Ta, Traverse AS Tr WHERE Ty.idType = Ta.idType AND Tr.idLiaison = Ta.idLiaison AND Tr.idPeriode = Ta.idPeriode AND Tr.idTraverse = ?");
+	$req1->bind_param("s", $id);
+	$req1->execute();
+	$value1 = $req1->get_result();
 
-	while($data = $value->fetch_assoc()){
-		array_push($tarif, $data['libelle'], $data['prixUnite']);
+	while($data1 = $value1->fetch_assoc()){
+		array_push($tarif, $data1['libelle'], $data1['prixUnite']);
 	}
-	$_SESSION['tarif'] = $tarif;	
+	$_SESSION['tarif'] = $tarif;
 	header('location: ../consultation_des_traversees.php');
 }
 
