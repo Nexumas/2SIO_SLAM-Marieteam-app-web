@@ -27,7 +27,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <a href="Accueil.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
-        <a href=""> COMPTE: ' . $_SESSION['userName'] . '</a>
         <a href="../server/deconnexion.php">DECONNEXION</a>
     </div>';
 
@@ -35,14 +34,24 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     $tab = $_SESSION['user'];
 
     while($i < count($tab)){
-        echo $tab[$i] . '</br>';
+        switch($i){
+            case $i == 0 && $i == 1:
+                echo 'Nom : ' . $tab[$i];
+                break;
+            case $i == 1:
+                echo 'Prenom : ' . $tab[$i];
+                break;
+            case $i == 2:
+                echo 'email : ' . $tab[$i];
+                break;
+        }
         $i = $i + 1;
     }
-    echo $_SESSION['nbPoint'];
+    echo 'Points fidélité : ' . $_SESSION['nbPoint'];
 
 }
 
 else{
-    die ('lol ... you are not loged ...');
+    header('location:../connexion.php');
 }
  ?>
