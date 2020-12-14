@@ -13,7 +13,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<title>MarieTeam - Accueil</title>
+<title>MarieTeam - reservation</title>
 <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -33,6 +33,40 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     </div>
 
 <?php 
+echo '<div class="reserv_header">';
 echo '<p>Liaison : ' . $_SESSION['res_trav'][0] . '</p>';
 echo '<p>Traverse : ' . $_SESSION['res_trav'][2] . ' ' . $_SESSION['res_trav'][3] .'</p>';
+echo '</div>';
+
+echo '<div class="content_reserv">';
+echo '<table class="tab_tarif"><tr>
+<th>| Passager |</th>
+<th>| Tarifs   |</th>
+</tr>';
+echo '<tr>
+<td align="center">Adulte</td>
+<td></td>
+</tr>';
+echo '<tr>
+<td align="center">Junior</td>
+<td></td>
+</tr>';
+echo '<tr>
+<td align="center">Enfant</td>
+<td></td>
+</tr>';
+echo '<tr>
+<td align="center">Voiture</td>
+<td></td>
+</tr>';
+echo '<tr>
+<td align="center">Fourgon</td>
+<td></td>
+</tr></table></br>';
+echo '</div>';
+
+echo '
+<form method="post" action="../server/gestion_reservation.php">
+<button class="btn_reserv" type="submit" name="reserver">Reserver</button>
+</form>';
 ?>

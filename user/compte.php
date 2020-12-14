@@ -12,7 +12,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<title>MarieTeam - Accueil</title>
+<title>MarieTeam - Compte</title>
 <link rel="stylesheet" href="../css/style.css">
 
 </head>
