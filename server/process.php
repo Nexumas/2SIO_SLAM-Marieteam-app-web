@@ -127,4 +127,26 @@ if(isset($_POST['modif'])){
 	unset($_SESSION['res_trav']);
 	header('location: ../admin/modification_traversees.php');
 }
+
+
+//Gestion de supression de traversée
+
+if(isset($_POST['supr'])){
+	$_SESSION['aSupr'] = true;
+	header('location: ../admin/modification_traversees.php');
+}
+
+if(isset($_POST['supprimer'])){
+	$id = $_SESSION['res_trav'][1];
+	$req = 'DELETE FROM traverse WHERE idTraverse = "'.$id.'"';
+	$conn->query($req);
+	unset($_SESSION['res_trav']);
+	unset($_SESSION['aSupr']);
+	header('location: ../consultation_des_liaisons.php');
+}
+
+if(isset($_POST['annuler'])){
+	$_SESSION['aSupr'] = false;
+	header('location: ../admin/modification_traversees.php');
+}
 ?>
