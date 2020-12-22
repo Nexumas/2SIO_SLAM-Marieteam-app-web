@@ -37,8 +37,8 @@
 		<td>
     <form method="post" action="server/process.php">
 			<p>Veuillez Selectionner un secteur : <select name="secteur">
-				<option value="Sc-001" >Poitoux Charente</button>
-				<option value="Sc-002" >Seine-St-Denis</button>
+				<option value="1" >Poitoux Charente</button>
+				<option value="2" >Seine-St-Denis</button>
 			</p>
 		</td>
 <!-- FIN Sélection du secteur (dropdown)-->
