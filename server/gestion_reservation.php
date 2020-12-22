@@ -104,6 +104,50 @@ else{
                     $q5 = 0;
                 }
 
+                //recupere le nombre de points de fidelite de l'utilisateur
+                $reqFidelSelect = $conn->prepare("SELECT nbPoint FROM utilisateur WHERE idUtilisateur = ?");
+                $reqFidelSelect->bind_param("i", $idUtil);
+                $reqFidelSelect->execute();
+
+                $resultFidel = $reqFidelSelect->get_result();
+                
+                if($resultFidel){
+                    $fetchFidel = $resultFidel->fetch_assoc();
+                    $pointFidel = $fetchFidel['nbPoint'];
+                }else{
+                    $pointFidel = 0;
+                }
+
+                $reqDate = $conn->prepare("SELECT DATEDIFF(MONTH, traverse.dateDepart, NOW()) FROM traverse)");
+                $reqDate->execute();
+
+                $resultDate = $reqDate->get_result();
+
+                if($resultDate){
+
+                    $fetchDate = $resultDate->fetch_assoc();
+
+                    $dateDiff = $fetchDate[1];
+
+                    echo $pointFidel;
+                    echo $dateDiff;
+
+                    if($dateDiff >= 2){
+
+                        $pointFidel = $pointFidel + 25;
+
+                        $reqFidel = $conn->prepare("UPDATE utilisateur SET nbPoint = ?");
+                        $reqFidel->bind_param("iss", $pointFidel);
+                        $reqFidel->execute();
+
+                        
+
+                        
+                    }else{
+
+                    }
+                }
+                
                 //calcul prix total
                 $tarif = $_SESSION['tarif_reserv'];
                 $tar1 = $tarif[0];
@@ -115,10 +159,7 @@ else{
                 $res = (($q1* $tar1) + ($q2*$tar2) + ($q3*$tar3) + ($q4*$tar4) + ($q5*$tar5));
                 $_SESSION['prixTotal'] = $res;
                 $_SESSION['idReserv'] = $idres;
-
-                echo $res;
-
-
+                
                 $_SESSION['purchase'] = true;
                 //redirection vers page finale
                 header('location:../user/confirm_purchase.php');
