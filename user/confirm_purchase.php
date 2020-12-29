@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $isConfirm = false;
 
 if(isset($_SESSION['purchase']) && $_SESSION['purchase'] == true){
@@ -7,9 +9,12 @@ if(isset($_SESSION['purchase']) && $_SESSION['purchase'] == true){
 }
 
 if($isConfirm = true){
-    echo '<p>Compte : ' .$_SESSION['userName'].'</p></br>';
-    echo '<p>id de reservation ' . $_SESSION['idReserv']. '</p></br>';
-    echo '<p>prix total : ' . $_SESSION['prixTotal'] . '</p></br>';
+    $un = $_SESSION['userName'];
+    $id =  $_SESSION['idReserv'];
+    $pt = $_SESSION['prixTotal'];
+    echo '<p>Compte : ' .$un.'</p></br>';
+    echo '<p>id de reservation ' .$id. '</p></br>';
+    echo '<p>prix total : ' .$pt. '</p></br>';
     echo '<button href="../Accueil.php">Retour Accueil</button>';
 
 }else{
