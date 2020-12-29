@@ -118,7 +118,7 @@ else{
                     $pointFidel = 0;
                 }
 
-                $reqDate = $conn->prepare("SELECT TIMESTAMPDIFF(MONTH, ?, traverse.dateDepart) FROM traverse)");
+                $reqDate = $conn->prepare("SELECT TIMESTAMPDIFF(MONTH, ?, traverse.dateDepart) FROM traverse) WHERE TIMESTAMPDIFF(MONTH, ?, traverse.dateDepart)");
                 $reqDate->bind_param("s", $today);
                 $reqDate->execute();
 
