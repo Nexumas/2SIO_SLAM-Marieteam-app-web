@@ -47,5 +47,7 @@ if(isset($_SESSION['res_trav'])){
 }
 ?>
 
+<button><a href="reservation.php">Réserver</a></button>
+
 </body>
 </html>
