@@ -25,8 +25,8 @@ else{
             $idUtil = $_SESSION['idUser'];//recuperation id utilisateur
             $idTrav = $_SESSION['res_trav'][1];//recuperation id traverse
 
-            $today = date("Y/m/d H:i");//recuperation date et heure du jour
-
+            $today = date("Y/m/d H:i");//recuperation date et heure du jour (timestamp)
+            $todayReqDate = date("Y/m/d"); //recupere date du jour pour la requete TIMESTAMPDIFF
             try{
 
                 //requete insertion reservation
@@ -118,38 +118,34 @@ else{
                     $pointFidel = 0;
                 }
 
-                $reqDate = $conn->prepare("SELECT TIMESTAMPDIFF(MONTH, ?, traverse.dateDepart) FROM traverse)");
-                $reqDate->bind_param("s", $today);
+                $reqDate = $conn->prepare("SELECT TIMESTAMPDIFF(MONTH, ?, traverse.dateDepart) FROM traverse");
+                $reqDate->bind_param("s", $todayReqDate);
                 $reqDate->execute();
 
                 $resultDate = $reqDate->get_result();
 
                 if($resultDate){
 
+
+                    //ajout +25 points de fidélité si reservation > 2 mois
                     $fetchDate = $resultDate->fetch_assoc();
 
-                    $dateDiff = $fetchDate[1];
-
-                    echo $pointFidel;
-                    echo $dateDiff;
+                    $dateDiff = $fetchDate;
 
                     if($dateDiff >= 2){
 
                         $pointFidel = $pointFidel + 25;
 
-                        $reqFidel = $conn->prepare("UPDATE utilisateur SET nbPoint = ?");
-                        $reqFidel->bind_param("iss", $pointFidel);
+                        $reqFidel = $conn->prepare("UPDATE utilisateur SET nbPoint = ? WHERE idUtilisateur = ?");
+                        $reqFidel->bind_param("ii", $pointFidel, $idUtil);
                         $reqFidel->execute();
-
-                        
-
                         
                     }else{
 
                     }
                 }
                 
-                //calcul prix total
+                //calcul prix total (affectation des valeurs de prix)
                 $tarif = $_SESSION['tarif_reserv'];
                 $tar1 = $tarif[0];
                 $tar2 = $tarif[1];
@@ -157,11 +153,38 @@ else{
                 $tar4 = $tarif[3];
                 $tar5 = $tarif[4];
 
-                $res = (($q1* $tar1) + ($q2*$tar2) + ($q3*$tar3) + ($q4*$tar4) + ($q5*$tar5));
+
+                //on recupere a nouveau les points de fidélité mis à jour
+                $reqFidelSelect2 = $conn->prepare("SELECT nbPoint FROM utilisateur WHERE idUtilisateur = ?");
+                $reqFidelSelect2->bind_param("i", $idUtil);
+                $reqFidelSelect2->execute();
+
+                $resultFidel2 = $reqFidelSelect2->get_result();
+                
+                if($resultFidel2){
+                    $fetchFidel2 = $resultFidel2->fetch_assoc();
+                    $pointFidel = $fetchFidel['nbPoint'];
+                }
+
+                //calcul du prix avec prise en compte de système de fidélisation
+                if($pointFidel < 100){
+                    $res = (($q1* $tar1) + ($q2*$tar2) + ($q3*$tar3) + ($q4*$tar4) + ($q5*$tar5));
+                }else{
+                    $res = (($q1* $tar1) + ($q2*$tar2) + ($q3*$tar3) + ($q4*$tar4) + ($q5*$tar5))*0.75;
+                }
+
                 $_SESSION['prixTotal'] = $res;
                 $_SESSION['idReserv'] = $idres;
                 
                 $_SESSION['purchase'] = true;
+
+                //remise des points de fidélité à 0
+                if($pointFidel >= 100){
+                    $pointFidel = 0;
+                    $reqFidel2 = $conn->prepare("UPDATE utilisateur SET nbPoint = ? WHERE idUtilisateur = ?");
+                    $reqFidel2->bind_param("ii", $pointFidel, $idUtil);
+                    $reqFidel2->execute();
+                }
                 //redirection vers page finale
                 header('location:../user/confirm_purchase.php');
 
