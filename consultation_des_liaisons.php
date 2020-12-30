@@ -1,6 +1,19 @@
 <?php
 	session_start();
-	
+  
+  $isConn = false;
+
+  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+      $isConn = true;
+      $nameUser = $_SESSION['userName'];
+  } 
+  if(isset($_SESSION['admin']) && $_SESSION['admin'] == true){
+    $isAdmin = true;
+  }
+  else{
+      $isAdmin = false;
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,6 +41,16 @@
         <a href="index.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
+        <?php if($isConn){
+                echo '<a href="../user/compte.php">COMPTE :' .$nameUser. '</a>'; 
+                echo '<a href="../server/deconnexion.php">DECONNEXION</a>';
+              }
+              if($isAdmin){
+                echo '<a href="../admin/modification_traversees.php">MODIFIER TRAVERSEES</a>';
+                echo '<a href="../admin/stats.php">STATISTIQUES</a>';
+              }
+        ?>
+        ?>
     </div>
 <!-- FIN NAVBAR  -->
 

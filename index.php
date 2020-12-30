@@ -7,6 +7,12 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     $isConn = true;
     $nameUser = $_SESSION['userName'];
 } 
+if(isset($_SESSION['admin']) && $_SESSION['admin'] == true){
+    $isAdmin = true;
+}
+else{
+    $isAdmin = false;
+}
 
 ?>
 
@@ -27,6 +33,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <a href="index.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
+        <?php if($isAdmin){
+            echo '<a href="../admin/modification_traversees.php">MODIFIER TRAVERSEES</a>';
+            echo '<a href="../admin/stats.php">STATISTIQUES</a>';
+        }
+        ?>
     </div>
 
     <div class="section-top">

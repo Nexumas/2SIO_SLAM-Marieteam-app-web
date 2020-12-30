@@ -1,5 +1,18 @@
 <?php
-	session_start();
+  session_start();
+  
+  $isConn = false;
+
+  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+      $isConn = true;
+      $nameUser = $_SESSION['userName'];
+  } 
+  if(isset($_SESSION['admin']) && $_SESSION['admin'] == true){
+    $isAdmin = true;
+  }
+  else{
+      $isAdmin = false;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -20,19 +33,24 @@
              Twolf59" >
 			 
 <body>
+<?php 
 
-	<!-- DEBUT NAVBAR -->
+if($isAdmin && $isConn){
+
+echo '
   <div class="header">
         <h3>MarieTeam</h3>
     </div>
     <div class="menu">
         <a href="../Accueil.php">ACCUEIL</a>
         <a href="../consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
-        <a href="../apropos.php">A PROPOS</a>
-    </div>
-<!-- FIN NAVBAR -->
+        <a href="../apropos.php">A PROPOS</a>';
+  echo '<a href="../user/compte.php">COMPTE :' .$nameUser. '</a>'; 
+  echo '<a href="../server/deconnexion.php">DECONNEXION</a>';
+  echo '<a href="../admin/modification_traversees.php">MODIFIER TRAVERSEES</a>';
+  echo '<a href="../admin/stats.php">STATISTIQUES</a>';
+  echo '</div>';
 
-<?php
 if(isset($_SESSION['aSupr'])){
   $testSupr = $_SESSION['aSupr'];
 }
@@ -63,7 +81,11 @@ else{
   echo '<form method="post" action="../server/process.php"><button style="background-color = #FF0000;" name="supprimer">OUI</button></form>';
   echo '<form method="post" action="../server/process.php"><button style="background-color = #0000FF;" name="annuler">NON</button></form>';
 }
-?>
 
-</body>
-</html>
+echo '</body>
+</html>';
+}else{
+  header('location:../index.php');
+}
+
+?>
