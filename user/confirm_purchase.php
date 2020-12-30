@@ -15,7 +15,7 @@ if($isConfirm = true){
     echo '<p>Compte : ' .$un.'</p></br>';
     echo '<p>id de reservation ' .$id. '</p></br>';
     echo '<p>prix total : ' .$pt. '</p></br>';
-    echo '<button href="../Accueil.php">Retour Accueil</button>';
+    echo '<button href="../index.php">Retour Accueil</button>';
 
 }else{
     die('erreur aucune confirmation !');

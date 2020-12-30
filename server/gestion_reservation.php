@@ -173,10 +173,10 @@ else{
                     $res = (($q1* $tar1) + ($q2*$tar2) + ($q3*$tar3) + ($q4*$tar4) + ($q5*$tar5))*0.75;
                 }
 
-                $_SESSION['prixTotal'] = $res;
-                $_SESSION['idReserv'] = $idres;
+                $_SESSION['prixTotal'] = $res;//variable session sotcke prix total pour affichage
+                $_SESSION['idReserv'] = $idres;//stocke id reservation pour affichage
                 
-                $_SESSION['purchase'] = true;
+                $_SESSION['purchase'] = true;//permet accès a la page de confirmation achat
 
                 //remise des points de fidélité à 0
                 if($pointFidel >= 100){
@@ -185,6 +185,7 @@ else{
                     $reqFidel2->bind_param("ii", $pointFidel, $idUtil);
                     $reqFidel2->execute();
                 }
+
                 //redirection vers page finale
                 header('location:../user/confirm_purchase.php');
 

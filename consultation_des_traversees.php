@@ -30,7 +30,7 @@
         <h3>MarieTeam</h3>
     </div>
     <div class="menu">
-        <a href="Accueil.php">ACCUEIL</a>
+        <a href="index.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
     </div>

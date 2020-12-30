@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <h3>MarieTeam</h3>
     </div>
     <div class="menu">
-        <a href="Accueil.php">ACCUEIL</a>
+        <a href="index.php">ACCUEIL</a>
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
         <?php if($isConn == true){echo '<a href="user/compte.php"> COMPTE: ' . $nameUser . '</a>';           

@@ -97,7 +97,7 @@ else{
                             $_SESSION['loggedin'] = true;//passe la variable de verification a true
                             $_SESSION['user'] = $tab_User;//stocke les données utilisateur
 
-                            header('location:../Accueil.php');
+                            header('location:../index.php');
                         } 
                         else{
                             header('Location:../connexion.php');
