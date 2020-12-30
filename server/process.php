@@ -44,10 +44,23 @@ if(isset($_POST['submit'])){
         while ($data = $value->fetch_assoc()){
             array_push($res, array($compt, $data['portDepart'], $data['portArrive'], $data['distanceMileMarin'], $data['idTraverse']));
             $compt = $compt+1;
-        }
+		}
+		
+		$reqNomSecteur = $conn->prepare("SELECT nom FROM secteur WHERE idSecteur = ?");
+		$reqNomSecteur->bind_param("i", $secteur);
+		$reqNomSecteur->execute();
+
+		$resSecteur = $reqNomSecteur->get_result();
+
+		if($resSecteur){
+			while($data = $resSecteur->fetch_assoc()){
+				$nomSecteur = $data['nom'];
+			}
+		}
+
         $_SESSION['res_liai'] = $res;
-        $_SESSION['cpt_liai'] = $compt;
-        header('location: ../consultation_des_liaisons.php');
+		$_SESSION['cpt_liai'] = $compt;
+        header('location: ../consultation_des_liaisons.php?secteur='.$nomSecteur.'&date='.$date);
         
     }else{
         echo 'Probleme: variable(s) nulle(s)';

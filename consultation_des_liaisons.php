@@ -59,8 +59,20 @@
 				<!-- Form code ends --> 
 
 				</div>
-	</tr>
+  </tr>
+  
+  
+
 </tbody></table></div>
+<div>
+    <?php
+      if(isset($_GET['secteur'])){
+        if(isset($_GET['date'])){
+          echo '<p>Resultat de recherche pour le secteur : '. $_GET['secteur'] . ' et la date de départ : '. $_GET['date'] . '</p>';
+        }
+      }
+      ?>
+  </div>
 
 <!-- FIN Sélection de la date-->
 <div>
