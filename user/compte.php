@@ -30,14 +30,13 @@ else{
     </div>
     <div class="menu">
         <a href="../index.php">ACCUEIL</a>
-        <a href="../consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
-        <a href="../apropos.php">A PROPOS</a>
-        <a href="../server/deconnexion.php">DECONNEXION</a>';
-
+        <a href="../consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>';
         if($isAdmin){
             echo '<a href="../admin/modification_traversees.php">MODIFIER TRAVERSEES</a>';
             echo '<a href="../admin/stats.php">STATISTIQUES</a>';
         }
+        echo '<a href="../apropos.php">A PROPOS</a>
+        <a href="../server/deconnexion.php">DECONNEXION</a>';
     echo '</div>';
 
     $i = 0;

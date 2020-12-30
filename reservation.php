@@ -34,14 +34,14 @@ else{
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
         <?php 
-            if($isConn == true){
-                echo '<a href="user/compte.php"> COMPTE: ' . $nameUser . '</a>';           
-                echo '<a href="server/deconnexion.php">DECONNEXION</a>';
-            } 
             if($isAdmin){
                 echo '<a href="../admin/modification_traversees.php">MODIFIER TRAVERSEES</a>';
                 echo '<a href="../admin/stats.php">STATISTIQUES</a>';
             }
+            if($isConn == true){
+                echo '<a href="user/compte.php"><img src="images/profil.png" style="width: 15px; height: 15px;  vertical-align: middle;"> ' . $nameUser . '</a>';           
+                echo '<a href="server/deconnexion.php">DECONNEXION</a>';
+            } 
         ?>
     </div>
 

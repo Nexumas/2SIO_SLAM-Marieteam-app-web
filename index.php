@@ -34,7 +34,6 @@ else{
         <a href="consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="apropos.php">A PROPOS</a>
         <?php if($isAdmin){
-            echo '<a href="../admin/modification_traversees.php">MODIFIER TRAVERSEES</a>';
             echo '<a href="../admin/stats.php">STATISTIQUES</a>';
         }
         ?>
@@ -53,7 +52,7 @@ else{
                 <a href="inscription.php">s inscrire</a>'; 
              }
             else{
-                echo '<a href="user/compte.php">COMPTE: ' . $nameUser .'</a>;
+                echo '<a href="user/compte.php"><img src="images/profil.png" style="width: 22px; height: 22px;  vertical-align: middle;"> ' . $nameUser .'</a>
                 <h5>ou</h5>
                 <a href="server/deconnexion.php">SE DECONNETER</a>';
             }   

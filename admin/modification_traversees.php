@@ -42,13 +42,12 @@ echo '
         <h3>MarieTeam</h3>
     </div>
     <div class="menu">
-        <a href="../Accueil.php">ACCUEIL</a>
+        <a href="../index.php">ACCUEIL</a>
         <a href="../consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
         <a href="../apropos.php">A PROPOS</a>';
-  echo '<a href="../user/compte.php">COMPTE :' .$nameUser. '</a>'; 
-  echo '<a href="../server/deconnexion.php">DECONNEXION</a>';
-  echo '<a href="../admin/modification_traversees.php">MODIFIER TRAVERSEES</a>';
   echo '<a href="../admin/stats.php">STATISTIQUES</a>';
+  echo '<a href="../user/compte.php"><img src="../images/profil.png" style="width: 15px; height: 15px;  vertical-align: middle;"> ' .$nameUser. '</a>'; 
+  echo '<a href="../server/deconnexion.php">DECONNEXION</a>';
   echo '</div>';
 
 if(isset($_SESSION['aSupr'])){
@@ -84,6 +83,7 @@ else{
 
 echo '</body>
 </html>';
+
 }else{
   header('location:../index.php');
 }
