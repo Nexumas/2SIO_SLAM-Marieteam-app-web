@@ -50,7 +50,6 @@
                 echo '<a href="../admin/stats.php">STATISTIQUES</a>';
               }
         ?>
-        ?>
     </div>
 <!-- FIN NAVBAR  -->
 
