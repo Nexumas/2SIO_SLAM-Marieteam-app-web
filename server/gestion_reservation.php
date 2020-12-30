@@ -172,9 +172,6 @@ else{
                 }else{
                     $res = (($q1* $tar1) + ($q2*$tar2) + ($q3*$tar3) + ($q4*$tar4) + ($q5*$tar5))*0.75;
                 }
-
-                $_SESSION['prixTotal'] = $res;//variable session sotcke prix total pour affichage
-                $_SESSION['idReserv'] = $idres;//stocke id reservation pour affichage
                 
                 $_SESSION['purchase'] = true;//permet accès a la page de confirmation achat
 
@@ -187,7 +184,7 @@ else{
                 }
 
                 //redirection vers page finale
-                header('location:../user/confirm_purchase.php');
+                header('location:../user/confirm_purchase.php?prixt='.$res.'&id='.$idres);
 
             }catch(Exception $e){
                 echo $e->getMessage();
