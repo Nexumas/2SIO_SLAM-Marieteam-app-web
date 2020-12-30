@@ -24,15 +24,16 @@ else{
 
             $idUtil = $_SESSION['idUser'];//recuperation id utilisateur
             $idTrav = $_SESSION['res_trav'][1];//recuperation id traverse
+            $res = 0;
 
             $today = date("Y/m/d H:i");//recuperation date et heure du jour (timestamp)
             $todayReqDate = date("Y/m/d"); //recupere date du jour pour la requete TIMESTAMPDIFF
             try{
 
                 //requete insertion reservation
-                $reqReserv = $conn->prepare("INSERT INTO reservation (dateReservation, idUtilisateur, idTraverse)
-                VALUES(?,?,?)");
-                $reqReserv->bind_param("sis", $today, $idUtil, $idTrav);
+                $reqReserv = $conn->prepare("INSERT INTO reservation (dateReservation, idUtilisateur, prixTotal, idTraverse)
+                VALUES(?,?,?,?)");
+                $reqReserv->bind_param("sids", $today, $idUtil, $res, $idTrav);
                 $reqReserv->execute();
 
                 //requete recuperation id reservation
@@ -173,7 +174,10 @@ else{
                     $res = (($q1* $tar1) + ($q2*$tar2) + ($q3*$tar3) + ($q4*$tar4) + ($q5*$tar5))*0.75;
                 }
                 
-                $_SESSION['purchase'] = true;//permet accès a la page de confirmation achat
+                //mise a jour prix total
+                $reqInsetPrixTotal = $conn->prepare("UPDATE reservation SET prixTotal = ? WHERE idReservation = ?");
+                $reqInsetPrixTotal->bind_param("ii", $res, $idres);
+                $reqInsetPrixTotal->execute();
 
                 //remise des points de fidélité à 0
                 if($pointFidel >= 100){
@@ -182,6 +186,8 @@ else{
                     $reqFidel2->bind_param("ii", $pointFidel, $idUtil);
                     $reqFidel2->execute();
                 }
+
+                $_SESSION['purchase'] = true;//permet accès a la page de confirmation achat
 
                 //redirection vers page finale
                 header('location:../user/confirm_purchase.php?prixt='.$res.'&id='.$idres);
