@@ -36,10 +36,10 @@
 	<div class="form-group">
 	<td>
         <input class="form-control" name="dateDebut" placeholder="Début de la période" type="date"/>
-        <input class="form-control" name="dateDebut" placeholder="Fin de la période" type="date"/>
+        <input class="form-control" name="dateFin" placeholder="Fin de la période" type="date"/>
 	</td>
 	<td>
-		<button class="btn btn-primary" name="submit" type="submit">Submit</button>
+		<button class="btn btn-primary" name="periode" type="submit">Submit</button>
 	</td>
 	</div>
 	</form>
