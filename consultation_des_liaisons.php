@@ -49,7 +49,7 @@
 				<!-- Form code begins -->
 				<div class="form-group">
 				<td>
-					<input class="form-control" id="date" name="date" placeholder="YYYY/MM/DD" type="text"/>
+					<input class="form-control" id="date" name="date" placeholder="date de depart" type="date"/>
 				</td>
 				<td>
 					<button class="btn btn-primary" name="submit" type="submit">Submit</button>
