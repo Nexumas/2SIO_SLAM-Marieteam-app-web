@@ -70,7 +70,7 @@ for($i = 0; $i < count($tabTarif); $i++){
 echo '</table>';
 
 if($isConn == true){
-    echo '<button class="btn_reserv" type="submit" name="reserver"  onclick="return(confirm("Etes-vous sûr de vouloir supprimer cette entrée"));">Reserver</button>
+    echo '<button class="btn_reserv" type="submit" name="reserver"  onclick="return confirm("Etes-vous sûr de vouloir supprimer cette entrée");">Reserver</button>
     </form>';
 }else{
     echo '<p>Vous devez être connecter pour reserver</p>';
