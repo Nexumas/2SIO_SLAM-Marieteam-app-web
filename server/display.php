@@ -30,8 +30,6 @@ if(isset($_POST['periode'])){
     }
 
     $_SESSION['CA'] = $resCA; //pour le transport du chiffre d'affaire dans stats.php
-    echo $resCA; //test d'affichage du résultat de la requête
-    echo '||';
 
 
     //Pour les passagers
@@ -50,15 +48,15 @@ if(isset($_POST['periode'])){
     $i = 0;
     while($i<count($resPassager)){
         $resTotal = $resTotal + $resPassager[$i][1]; //calcule le total de passagers
-        echo $resPassager[$i][0].' = '.$resPassager[$i][1]." | "; //test du résultat de la requête SQL
         $i = $i + 1;
     }
 
-    echo '||';
-    echo $resTotal; //test de la boucle ci-dessus
 
     $_SESSION['Cat'] = $resPassager; //transport du nombre de passagers par catégorie vers stats.php
     $_SESSION['Total'] = $resTotal; //transport du total de passagers vers stats.php
+
+    header("location:../admin/stats.php");
+
 }
 
 ?>

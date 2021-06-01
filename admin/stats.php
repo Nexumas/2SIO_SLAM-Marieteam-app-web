@@ -26,7 +26,7 @@
 <body>
 
 <?php
-if($isAdmin && $isConn){
+if($isAdmin && $isConn ){
     echo 
         '<div class="header">
             <h3>MarieTeam</h3>
@@ -35,11 +35,27 @@ if($isAdmin && $isConn){
             <a href="../index.php">ACCUEIL</a>
             <a href="../consultation_des_liaisons.php">CONSULTER LES LIAISONS</a>
             <a href="../apropos.php">A PROPOS</a>';
-        echo '<a href="../user/compte.php"><img src="../images/profil.png" style="width: 15px; height: 15px;  vertical-align: middle;"> ' .$nameUser. '</a>'; 
-        echo '<a href="../server/deconnexion.php">DECONNEXION</a>';
-        echo '</div>';
+    echo '<a href="../user/compte.php"><img src="../images/profil.png" style="width: 15px; height: 15px;  vertical-align: middle;"> ' .$nameUser. '</a>'; 
+    echo '<a href="../server/deconnexion.php">DECONNEXION</a>';
+    echo '</div>';
 
-        echo'
+
+    if(isset($_SESSION['Cat']) && isset($_SESSION['CA'])){
+        echo '<table><tr><td>Chiffre d affaire engendré </td><td>||</td><td> ',$_SESSION['CA'],'</td></tr></table>';
+        echo '';
+        echo '';
+        echo '<table><tr><td>Catégorie </td><td>||</td><td> nombre de places vendues</td></tr>';
+        $i = 0;
+        while($i<count($_SESSION['Cat'])){
+            echo '<tr><td>',$_SESSION['Cat'][$i][0],' </td><td>||</td><td> ',$_SESSION['Cat'][$i][1],'</td></tr>';
+            $i = $i+1;
+        }
+        echo '<tr><td>Total </td><td>||</td><td> ',$_SESSION['Total'],'</td></tr></table>';
+        unset($_SESSION['Cat']);
+        unset($_SESSION['CA']);
+        unset($_SESSION['Total']);
+    }else{
+    echo'
         <form method="post" action="../server/display.php">
         <div class="form-group">
         <td>
@@ -50,10 +66,16 @@ if($isAdmin && $isConn){
             <button class="btn btn-primary" name="periode" type="submit">Submit</button>
         </td>
         </div>
-        </form>
-    </body>
+        </form>';
+    }
+    
+    echo '</body>
 
     </html>';
-}else{
+}
+
+else{
     header('location:../index.php');
 }
+
+?>
