@@ -62,6 +62,7 @@
 			<p>Veuillez Selectionner un secteur : <select name="secteur">
 				<option value="1" >Poitoux Charente</button>
 				<option value="2" >Seine-St-Denis</button>
+				<option value="3" >Nord</button>
 			</p>
 		</td>
 <!-- FIN Sélection du secteur (dropdown)-->
